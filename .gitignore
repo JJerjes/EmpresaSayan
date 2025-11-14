@@ -1,0 +1,25 @@
+# Archivos de caché del Sistema Operativo
+.DS_Store
+Thumbs.db
+
+# Directorios de módulos y entornos de desarrollo (Python)
+/venv/
+/env/
+__pycache__/
+*.pyc
+*.pyd
+*.pyo
+
+# Archivos de caché de Navegadores o IDEs
+/node_modules/
+.vscode/
+
+# Archivos de Datos Sensibles (¡Crucial para el Backend de Python!)
+# Si usas un archivo para configurar credenciales, nunca lo subas.
+.env
+config.ini
+secrets.json
+
+# Archivos Temporales/Log
+*.log
+*.tmp
