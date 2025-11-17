@@ -216,6 +216,67 @@ main {
 
 
 
+/*------------------
+  SECTION HISTORIA
+------------------*/
+
+.section-title-banner {
+    background-color: rgb(229, 112, 22);
+    padding: 30px;
+    margin: 40px 0;
+}
+
+.section-title-banner h2 {
+    color: whitesmoke;
+    font-size: 1.9em;
+}
+
+.section-title-banner p {
+    color: whitesmoke;
+    font-size: 1em;
+}
+
+.section-title-banner h2,
+.section-title-banner p {
+    display: grid;
+    justify-content: left;
+    align-items: center;
+    margin: 0;
+    padding: 0.0rem 0;
+}
+
+.story-summary-section {
+    padding: 0 20px 30px 20px;
+}
+
+.story-content-summary h2 {
+    padding: 20px 0;
+    font-size: 2.5rem;
+}
+
+.story-image-container {
+    position: relative;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.story-summary-image {
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.cta-secondary {
+    color: rgb(229, 112, 22);
+    font-weight: 600;
+}
+
+.cta-secondary:hover {
+    font-weight: bolder;
+}
+
 /*
 .categorias {
     display: flex;
@@ -423,16 +484,24 @@ MEDIA QUERY
         padding: 3rem 0;
     }
 
-    .categorias {
-        flex-direction: row;
-        flex-wrap: nowrap;
-        justify-content: center;
-        gap: 2rem;
+    .story-summary-section {
+        display: flex;
+        align-items: center;
+        margin: 0 auto;
+        gap: 40px;
     }
 
-    .categorias article {
-        flex: 1 1 30%;
-        max-width: 360px;
+    .story-image-container,
+    .story-content-summary {
+        flex: 1;
+        /* Ambos ocupan el 50% del espacio disponible */
+        width: auto;
+        /* Restablecer el width: 100% del móvil */
+    }
+
+    /* Asegurar que la imagen sea responsiva dentro de su columna */
+    .story-summary-image {
+        max-width: 100%;
     }
 
     footer {
