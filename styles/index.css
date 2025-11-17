@@ -96,7 +96,7 @@ header p {
     flex-direction: column;
     width: 100%;
     position: fixed;
-    top: 193px;
+    top: 192px;
     z-index: 999;
 }
 
