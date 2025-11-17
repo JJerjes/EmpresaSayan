@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     await loadComponent("#footer-placeholder", "includes/footer.html");
     await loadComponent("#modal-placeholder", "includes/modal.html");
 
-    // Aquí ya está cargado el header, ahora corre burguer.js
+    // ICONO HAMBURGUESA
     const menuButton = document.getElementById("menu");
     const nav = document.getElementById("nav");
 
@@ -44,4 +44,5 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.body.classList.toggle("menu-open");
     });
 })
+
 

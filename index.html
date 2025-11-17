@@ -38,12 +38,50 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <script>window.basePath = ""</script>
     <script src="scripts/include.js" defer></script>
+    <script src="scripts/carousel.js" defer></script>
     <script src="scripts/modal.js" defer></script>
 </head>
 <body>
     <div id="header-placeholder"></div>
-    <main>
-    </main>
+
+    <main role="main">
+    
+    <section 
+        class="events-carousel-section carousel-container" 
+        role="region" 
+        aria-label="Carrusel de Próximos Eventos de Hacienda Sayán"
+    >
+        <div class="carousel-wrapper" role="tablist"> 
+
+            <div class="carousel-slide" role="tabpanel" id="slide1" aria-labelledby="event-title-1">
+                <img src="images/carousel/carousel-I.webp" alt="Fotografía de nuestro stand en la Feria Gastronómica de Lima">
+                <div class="slide-info">
+                    <h3 id="event-title-1">Feria Gastronómica de Lima Norte</h3> 
+                    <p>📍 Lugar: Parque de la Exposición<br>🗓️ Fecha: 1 al 3 de Diciembre</p>
+                </div>
+            </div>
+
+            <div class="carousel-slide" role="tabpanel" id="slide2" aria-labelledby="event-title-2">
+                <img src="images/carousel/carousel-III.webp" alt="Alfajores Sayán destacados en la revista Gourmet">
+                <div class="slide-info">
+                    <h3 id="event-title-2">Mención en Revista Gourmet Peruana</h3>
+                    <p>📍 Lugar: Parque de la Exposición<br>🗓️ Fecha: 1 al 3 de Diciembre</p>                
+                </div>                
+            </div>
+            
+            <div class="carousel-slide" role="tabpanel" id="slide3" aria-labelledby="event-title-3">
+                <img src="images/carousel/carousel-IV.webp" alt="Nuevo punto de venta en el Mercado de Surquillo">
+                <div class="slide-info">
+                    <h3 id="event-title-3">Nuevo Punto de Venta en Surquillo</h3>
+                    <p>📍 Lugar: Parque de la Exposición<br>🗓️ Fecha: 1 al 3 de Diciembre</p>                    
+                </div>
+            </div>
+        </div>
+            
+        <button class="carousel-prev" aria-label="Slide anterior" aria-controls="slide1">&#10094;</button>
+        <button class="carousel-next" aria-label="Siguiente slide" aria-controls="slide1">&#10095;</button>
+    </section>
+</main>
 
     <!-- <div id="footer-placeholder"></div>
 

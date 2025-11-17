@@ -24,9 +24,9 @@ body {
     min-height: 100vh;
 }
 
-/*
-HEADER
-*/
+/*------------------
+       HEADER
+------------------*/
 header {
     grid-area: header;
     display: flex;
@@ -133,16 +133,90 @@ header p {
     display: flex;
 }
 
-/*
-MAIN
-*/
+/*----------------
+        MAIN
+----------------*/
 
+/*--------
+ CAROUSEL
+--------*/
 main {
     grid-area: main;
     padding: 1rem 0;
-    margin-top: 120px;
+    margin-top: 230px;
 }
 
+.section-title {
+    text-align: center;
+    padding: 10px;
+}
+
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.carousel-wrapper {
+    display: flex;
+    scroll-snap-type: x mandatory;
+    overflow: hidden;
+    scroll-behavior: smooth;
+}
+
+.carousel-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    position: relative;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.carousel-prev,
+.carousel-next {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 50%;
+}
+
+.carousel-prev {
+    left: 10px;
+}
+
+.carousel-next {
+    right: 10px;
+}
+
+.carousel-prev:hover,
+.carousel-next:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.slide-info p {
+    color: gray;
+    font-size: 1em;
+    margin: 5px 0;
+}
+
+.slide-info {
+    font-family: 'Lora', serif;
+}
+
+
+
+/*
 .categorias {
     display: flex;
     flex-direction: column;
@@ -170,12 +244,12 @@ main {
 .categorias img:hover {
     transform: scale(0.99);
     /* Se encoge ligeramente */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    /* Un poco de sombra para dar profundidad */
-    cursor: pointer;
-}
+/* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
+/* Un poco de sombra para dar profundidad */
+/* cursor: pointer; */
+/* } */
 
-.categorias button {
+/* .categorias button {
     width: 100%;
     background-color: orangered;
     color: white;
@@ -194,8 +268,8 @@ main {
 
 .categorias button:hover {
     background-color: red;
-}
-
+}  */
+-----------------*/
 /*
 FOOTER
 */
