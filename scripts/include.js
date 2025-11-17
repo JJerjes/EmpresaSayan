@@ -14,22 +14,35 @@ document.addEventListener("DOMContentLoaded", async () => {
                 html = html.replaceAll('href="images/', 'href="../images/');
 
                 html = html.replaceAll('src="scripts/', 'src="../scripts/');
+<<<<<<< HEAD
                 html = html.replaceAll('src="images/', 'src="../images/');
+=======
+                html = html.replaceAll('src=images/', 'src="../images/');
+>>>>>>> af3c25b502cec7c86ac8d71ae25a71a87487379b
 
                 html = html.replaceAll('href="/styles/', 'href="../styles/');
                 html = html.replaceAll('href="/images/', 'href="../images/');
 
+<<<<<<< HEAD
                 html = html.replaceAll('src="/scripts/', 'src="../scripts/');
                 html = html.replaceAll('src="/images/', 'src="../images/');
             }
 
 
             container.innerHTML = html;
+=======
+                html = html.replaceAll('src="/script/', 'src="../scripts/');
+                html = html.replaceAll('src="/images/', 'src="../images/');
+            }
+
+            container.innerHTML = html
+>>>>>>> af3c25b502cec7c86ac8d71ae25a71a87487379b
         } catch (err) {
             console.error(`Error cargando ${url}:`, err);
         }
     };
 
+<<<<<<< HEAD
     await loadComponent("#header-placeholder", "includes/header.html");
     await loadComponent("#footer-placeholder", "includes/footer.html");
     await loadComponent("#modal-placeholder", "includes/modal.html");
@@ -45,3 +58,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 })
 
+=======
+    await loadComponent('#header-placeholder', 'includes/header.html')
+})
+>>>>>>> af3c25b502cec7c86ac8d71ae25a71a87487379b
