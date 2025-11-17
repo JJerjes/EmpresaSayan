@@ -1,0 +1,24 @@
+[
+    {
+        "id": 1,
+        "nombre": "Cartera Tote Cuero Beige",
+        "precioAnterior": 199.90,
+        "precio": 159.90,
+        "imagen": "images/modas/bolso.avif",
+        "descripcion": "Cartera tipo tote de cuero sintético color beige, espaciosa y elegante.",
+        "oferta": true,
+        "stock": 7,
+        "categoria": "moda"
+    },
+    {
+        "id": 2,
+        "nombre": "Cartera Cruzada Negra Minimal",
+        "precioAnterior": 149.90,
+        "precio": 119.90,
+        "imagen": "images/modas/bolso.avif",
+        "descripcion": "Cartera pequeña y práctica con correa cruzada, diseño minimalista.",
+        "oferta": false,
+        "stock": 5,
+        "categoria": "moda"
+    }
+]
