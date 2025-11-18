@@ -485,6 +485,89 @@ main {
     color: #25D366;
 }
 
+/*-----------------
+       FOOTER 
+-----------------*/
+
+.main-footer {
+    background-color: #333333;
+    /* background-color: rgb(229, 112, 22); */
+    padding: 40px 20px 10px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.footer-grid-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    gap: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #444;
+    text-align: center;
+    grid-template-columns: 1fr;
+}
+
+.footer-logo {
+    border-radius: 10%;
+}
+
+.navigation-info img {
+    margin: 10px;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.contact-support h3 {
+    color: white;
+}
+
+.fas {
+    color: white;
+}
+
+.contact-details p,
+.contact-details a {
+    color: white;
+}
+
+.social-links-section h3 {
+    color: white;
+}
+
+.social-links a,
+.social-links i {
+    color: white;
+}
+
+.mt-20 {
+    margin: 20px 0 0 0;
+}
+
+.copyright-info p {
+    color: white;
+}
+
+.footer-bottom p {
+    color: white;
+}
+
+/* Busca esta regla y cámbiala: */
+.footer-links a {
+    color: white;
+    /* <-- CAMBIADO A BLANCO */
+    text-decoration: none;
+    transition: color 0.3s;
+    list-style: none;
+}
+
+/* Y para el hover, podemos usar el color del fondo original o un color que contraste: */
+.footer-links a:hover {
+    color: rgb(229, 112, 22);
+    /* Color oscuro al pasar el mouse */
+}
+
 /*
 .categorias {
     display: flex;
@@ -725,10 +808,6 @@ MEDIA QUERY
     }
 
 
-    footer {
-        flex-direction: row;
-        justify-content: space-between;
-    }
 
 }
 
