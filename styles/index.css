@@ -532,6 +532,14 @@ main {
     color: white;
 }
 
+.contact-details:hover i {
+    color: rgb(229, 112, 22);
+}
+
+.contact-details:hover a {
+    color: rgb(229, 112, 22);
+}
+
 .social-links-section h3 {
     color: white;
 }
@@ -539,6 +547,10 @@ main {
 .social-links a,
 .social-links i {
     color: white;
+}
+
+.social-links:hover a {
+    color: rgb(229, 112, 22);
 }
 
 .mt-20 {
@@ -551,6 +563,7 @@ main {
 
 .footer-bottom p {
     color: white;
+    text-align: center;
 }
 
 /* Busca esta regla y cámbiala: */
@@ -566,6 +579,48 @@ main {
 .footer-links a:hover {
     color: rgb(229, 112, 22);
     /* Color oscuro al pasar el mouse */
+}
+
+/*----------------------
+     WHATSAPP FIJO
+----------------------*/
+
+/* --- ESTILOS DEL BOTÓN FLOTANTE DE WHATSAPP --- */
+
+.whatsapp-float {
+    position: fixed;
+    /* Mantiene el botón visible al hacer scroll */
+    bottom: 50px;
+    /* 20px desde la parte inferior */
+    right: 10px;
+    /* 20px desde la derecha */
+
+    /* Diseño */
+    width: 60px;
+    height: 60px;
+    background-color: #25D366;
+    /* Verde icónico de WhatsApp */
+
+    border-radius: 50%;
+    /* Lo convierte en círculo */
+    text-align: center;
+    font-size: 30px;
+
+    /* Flex para centrar el ícono */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Sombra y Transición */
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    /* Asegura que esté por encima de otros elementos */
+    transition: background-color 0.3s ease;
+}
+
+.whatsapp-float:hover {
+    background-color: #128C7E;
+    /* Verde más oscuro al pasar el mouse */
 }
 
 /*
@@ -805,6 +860,17 @@ MEDIA QUERY
 
     .options-container {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-grid-container {
+        /* max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        gap: 30px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid #444;
+        text-align: center; */
+        grid-template-columns: repeat(3, 1fr);
     }
 
 
