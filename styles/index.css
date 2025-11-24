@@ -586,41 +586,44 @@ main {
 ----------------------*/
 
 /* --- ESTILOS DEL BOTÓN FLOTANTE DE WHATSAPP --- */
-
 .whatsapp-float {
     position: fixed;
-    /* Mantiene el botón visible al hacer scroll */
     bottom: 50px;
-    /* 20px desde la parte inferior */
     right: 10px;
-    /* 20px desde la derecha */
 
-    /* Diseño */
+    /* El ícono de Font Awesome está dentro del <a>, aseguramos que sea blanco */
+
     width: 60px;
     height: 60px;
     background-color: #25D366;
-    /* Verde icónico de WhatsApp */
-
+    color: white;
+    /* Verde icónico normal */
+    text-decoration: none;
     border-radius: 50%;
-    /* Lo convierte en círculo */
     text-align: center;
     font-size: 30px;
 
-    /* Flex para centrar el ícono */
+    /* ... (propiedades de flex y box-shadow) ... */
     display: flex;
     justify-content: center;
     align-items: center;
 
-    /* Sombra y Transición */
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
     z-index: 1000;
-    /* Asegura que esté por encima de otros elementos */
     transition: background-color 0.3s ease;
 }
 
+.fab {
+    color: white;
+}
+
+/* 🔑 CLAVE: Aumentamos la especificidad usando 'a.whatsapp-float:hover' */
 .whatsapp-float:hover {
-    background-color: #128C7E;
-    /* Verde más oscuro al pasar el mouse */
+    /* Esto anula el background-color normal y fuerza el marrón/naranja */
+    background-color: #c06226;
+
+    /* Aseguramos que el color del ícono (texto) se mantenga blanco sobre el nuevo fondo */
+
 }
 
 /*
@@ -863,13 +866,6 @@ MEDIA QUERY
     }
 
     .footer-grid-container {
-        /* max-width: 1200px;
-        margin: 0 auto;
-        display: grid;
-        gap: 30px;
-        padding-bottom: 30px;
-        border-bottom: 1px solid #444;
-        text-align: center; */
         grid-template-columns: repeat(3, 1fr);
     }
 

@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentIndex = 0;
     const total = slides.length;
-    const intervalTime = 7000;
+    const intervalTime = 15000;
 
     const goToSlide = index => {
         wrapper.scrollTo({ left: wrapper.clientWidth * index, behavior: 'smooth' });
