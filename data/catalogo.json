@@ -7,7 +7,7 @@
         "unidades": 6,
         "precio": 25.00,
         "precioAnterior": null,
-        "imagen": "images/carousel/carousel-III.webp",
+        "imagen": "../images/carousel/carousel-III.webp",
         "oferta": false,
         "stock": "disponible",
         "destacado": true
@@ -20,7 +20,7 @@
         "unidades": 6,
         "precio": 25.00,
         "precioAnterior": null,
-        "imagen": "images/carousel/carousel-III.webp",
+        "imagen": "../images/carousel/carousel-III.webp",
         "oferta": false,
         "stock": "disponible",
         "destacado": true
@@ -33,7 +33,7 @@
         "unidades": 6,
         "precio": 25.00,
         "precioAnterior": null,
-        "imagen": "images/carousel/carousel-III.webp",
+        "imagen": "../images/carousel/carousel-III.webp",
         "oferta": false,
         "stock": "disponible",
         "destacado": true
@@ -46,7 +46,7 @@
         "unidades": 6,
         "precio": 25.00,
         "precioAnterior": null,
-        "imagen": "images/carousel/carousel-III.webp",
+        "imagen": "../images/carousel/carousel-III.webp",
         "oferta": false,
         "stock": "disponible",
         "destacado": true
@@ -59,7 +59,7 @@
         "unidades": 6,
         "precio": 25.00,
         "precioAnterior": null,
-        "imagen": "images/carousel/carousel-III.webp",
+        "imagen": "../images/carousel/carousel-III.webp",
         "oferta": false,
         "stock": "disponible",
         "destacado": true
@@ -72,7 +72,7 @@
         "unidades": 6,
         "precio": 25.00,
         "precioAnterior": null,
-        "imagen": "images/carousel/carousel-III.webp",
+        "imagen": "../images/carousel/carousel-III.webp",
         "oferta": false,
         "stock": "disponible",
         "destacado": true
@@ -85,7 +85,7 @@
         "unidades": 6,
         "precio": 25.00,
         "precioAnterior": null,
-        "imagen": "images/carousel/carousel-III.webp",
+        "imagen": "../images/carousel/carousel-III.webp",
         "oferta": false,
         "stock": "disponible",
         "destacado": true
@@ -98,7 +98,7 @@
         "unidades": 6,
         "precio": 25.00,
         "precioAnterior": null,
-        "imagen": "images/carousel/carousel-III.webp",
+        "imagen": "../images/carousel/carousel-III.webp",
         "oferta": false,
         "stock": "disponible",
         "destacado": true
@@ -111,7 +111,7 @@
         "unidades": 6,
         "precio": 25.00,
         "precioAnterior": null,
-        "imagen": "images/carousel/carousel-III.webp",
+        "imagen": "../images/carousel/carousel-III.webp",
         "oferta": false,
         "stock": "disponible",
         "destacado": true
