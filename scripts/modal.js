@@ -2,6 +2,26 @@ document.addEventListener("DOMContentLoaded", () => {
     let intentos = 0;
     const maxIntentos = 50;
 
+    // Función de control de visibilidad (se necesita aquí y en el setInterval)
+    function controlarVisibilidadModal() {
+        // Lee directamente la lista de pedidos con la clave UNIFICADA.
+        const pedidos = JSON.parse(localStorage.getItem('haciendaSayanPedidos') || '[]');
+        const modal = document.getElementById('modal-seleccion');
+        const barra = document.getElementById('barra-carrito');
+
+        if (modal && barra) {
+            if (pedidos.length > 0) {
+                // Usar 'block' o 'flex' para mostrar el modal (depende de tu CSS)
+                modal.style.display = 'block';
+                barra.style.display = 'none';
+                // Asegura que al cargar, si hay items, se muestre el modal o se minimice
+            } else {
+                modal.style.display = 'none';
+                barra.style.display = 'none';
+            }
+        }
+    }
+
     const esperarModal = setInterval(() => {
         const modal = document.getElementById('modal-seleccion');
         const barra = document.getElementById('barra-carrito');
@@ -12,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (modal && barra && btnMinimizar && btnRestaurar && btnHacerPedido) {
             clearInterval(esperarModal);
 
+            // Funciones de control de estado del modal (simples)
             function restaurarModal() {
                 modal.style.display = 'block';
                 barra.style.display = 'none';
@@ -22,39 +43,27 @@ document.addEventListener("DOMContentLoaded", () => {
                 barra.style.display = 'flex';
             }
 
-            function controlarVisibilidadModal() {
-                if (Array.isArray(window.productosSeleccionados) && window.productosSeleccionados.length > 0) {
-                    restaurarModal();
-                } else {
-                    modal.style.display = 'none';
-                    barra.style.display = 'none';
-                }
-            }
-
             btnMinimizar.addEventListener('click', minimizarModal);
             btnRestaurar.addEventListener('click', restaurarModal);
 
             btnHacerPedido.addEventListener('click', () => {
-                const productos = Array.isArray(window.productosSeleccionados) ? window.productosSeleccionados : [];
+                const pedidos = JSON.parse(localStorage.getItem('haciendaSayanPedidos') || '[]');
 
-                if (productos.length === 0) {
+                if (pedidos.length === 0) {
                     alert('No hay productos seleccionados para hacer el pedido.');
                     return;
                 }
 
-                localStorage.setItem('productosSeleccionados', JSON.stringify(productos));
-
-                const totalTexto = document.getElementById('total-precio')?.innerText || '0';
-                const total = parseFloat(totalTexto.replace(/[^\d.]/g, '')) || 0;
-                localStorage.setItem('totalPrecio', total);
-
-                const basePath = window.basePath || '/';
-                window.location.href = basePath + "pages/formulario.html";
+                // Redirigir al formulario
+                const basePath = window.basePath || '../'; // Usamos ruta relativa segura
+                window.location.href = basePath + "formulario.html";
             });
 
+            // Exponer funciones necesarias globalmente
             window.mostrarModal = restaurarModal;
             window.controlarVisibilidadModal = controlarVisibilidadModal;
 
+            // Al iniciar, forzar la primera carga y visibilidad (usando la clave UNIFICADA)
             controlarVisibilidadModal();
 
         } else {
@@ -62,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 clearInterval(esperarModal);
                 console.warn('⚠️ No se pudo encontrar el modal o botones tras varios intentos.');
             } else {
-                console.log('⏳ Esperando que el modal esté disponible en el DOM...');
+                // console.log('⏳ Esperando que el modal esté disponible en el DOM...');
             }
         }
     }, 100);

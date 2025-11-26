@@ -1,157 +1,263 @@
-document.addEventListener("DOMContentLoaded", async () => {
-    // 1. Inicialización de Carrito/Selección (Mantener)
-    const productosGuardados = localStorage.getItem("productosSeleccionados");
-    // 'window.productosSeleccionados' actúa como el Carrito
-    window.productosSeleccionados = productosGuardados ? JSON.parse(productosGuardados) : [];
+document.addEventListener('DOMContentLoaded', () => {
+    const contenedorProductos = document.getElementById('contenedor-productos');
+    const RUTA_JSON = '../data/catalogo.json';
 
-    const contenedor = document.getElementById("catalogo-completo"); // Cambiado a tu ID
-    const basePath = window.basePath || "";
+    // --- Funciones Auxiliares para localStorage ---
 
-    // **🛑 El código de detección de categoría por URL ha sido ELIMINADO 🛑**
+    function obtenerPedidosActuales() {
+        const pedidosJSON = localStorage.getItem('haciendaSayanPedidos');
+        return pedidosJSON ? JSON.parse(pedidosJSON) : [];
+    }
 
-    try {
-        // 2. Cargar el Catálogo de Alfajores directamente (Ruta Fija)
-        // Asegúrate que esta ruta es correcta: 'catalogo.json' o 'data/catalogo.json'
-        const urlCatalogo = `${basePath}catalogo.json`;
+    function guardarPedidos(pedidos) {
+        localStorage.setItem('haciendaSayanPedidos', JSON.stringify(pedidos));
+    }
 
-        console.log('fetch URL:', urlCatalogo);
-        const respuesta = await fetch(urlCatalogo);
-
-        if (!respuesta.ok) {
-            throw new Error(`Error al cargar el catálogo: ${respuesta.status}`);
+    // Función que se ejecuta al hacer clic en 'Agregar'
+    function agregarAlPedido(productoId, cantidad, productosDisponibles) {
+        if (cantidad < 1 || isNaN(cantidad)) {
+            alert('Por favor, ingresa una cantidad mayor a cero (mínimo 1 paquete).');
+            return;
         }
 
-        const productos = await respuesta.json();
+        const pedidos = obtenerPedidosActuales();
+        const productoInfo = productosDisponibles.find(p => p.id === productoId);
 
-        // 3. Renderizado de Cards de Alfajores
-        productos.forEach(producto => {
-            const card = document.createElement("article");
-            card.classList.add("product-card", "full-details"); // Clases de la card
+        if (!productoInfo) return;
 
-            let etiquetaHTML = '';
-            // Si quieres mantener etiquetas de 'OFERTA' o 'NUEVO', déjalas, si no, elimina este bloque
-            if (producto.oferta) {
-                etiquetaHTML = `<span class="etiqueta-oferta">OFERTA</span>`;
+        // Buscar si el producto ya está en la lista (sin considerar cantidad, solo ID)
+        const itemExistente = pedidos.find(item => item.id === productoId);
+
+        if (itemExistente) {
+            // Si existe, sumar la cantidad nueva
+            itemExistente.cantidad += cantidad;
+        } else {
+            // Si es nuevo, añadirlo con la cantidad seleccionada
+            pedidos.push({
+                id: productoId,
+                nombre: productoInfo.nombre,
+                precio: productoInfo.precio,
+                unidades: productoInfo.unidades,
+                cantidad: cantidad
+            });
+        }
+
+        guardarPedidos(pedidos);
+
+        // 🎯 INTEGRACIÓN CON MODAL: Dibuja el modal y lo muestra
+        if (typeof actualizarListaSeleccionados === 'function') {
+            actualizarListaSeleccionados(); // Dibuja la lista y el total
+        }
+        if (window.mostrarModal) {
+            window.mostrarModal(); // Muestra el modal
+        }
+    }
+
+    // --- Funciones de Carga y Renderizado ---
+
+    async function obtenerProductos() {
+        try {
+            const response = await fetch(RUTA_JSON);
+            if (!response.ok) {
+                throw new Error(`Error al cargar el catálogo: ${response.status}`);
+            }
+            const productos = await response.json();
+            mostrarProductos(productos);
+
+            // 🛑 IMPORTANTE: Añadir el listener DEPUÉS de que el HTML existe
+            setupEventListeners(productos);
+
+            // 🎯 LLAMADA INICIAL AL CARGAR: Cargar la lista de pedidos al inicio
+            if (typeof actualizarListaSeleccionados === 'function') {
+                actualizarListaSeleccionados();
             }
 
-            const precioAnteriorHTML = producto.precioAnterior
-                ? `<span class="precio-anterior">S/ ${producto.precioAnterior.toFixed(2)}</span>`
-                : "";
+        } catch (error) {
+            console.error("Fallo al cargar el archivo de productos:", error);
+            contenedorProductos.innerHTML = '<p class="error-msg">Lo sentimos, no pudimos cargar el catálogo. Por favor, inténtelo más tarde.</p>';
+        }
+    }
 
-            // Eliminado infoPreventaHTML ya que 'preventa' no aplica
+    // 🏆 FUNCIÓN CLAVE: Ahora incluye el input de Cantidad
+    function crearTarjetaProducto(producto) {
+        const precioActual = producto.precio.toFixed(2);
 
-            card.innerHTML = `
-                <img src="${basePath}${producto.imagen}" alt="${producto.nombre}" class="catalogo-img">
+        let precioAnteriorHTML = '';
+        if (producto.oferta && producto.precioAnterior) {
+            const precioAnterior = producto.precioAnterior.toFixed(2);
+            precioAnteriorHTML = `<span class="precio-anterior">S/ ${precioAnterior}</span>`;
+        }
+
+        const cardHTML = `
+        <article class="product-card" data-id="${producto.id}" data-destacado="${producto.destacado}">
+            <div class="product-image-container">
+                <img src="${producto.imagen}" alt="Imagen de ${producto.nombre}" loading="lazy">
+                ${producto.oferta ? '<span class="badge-oferta">¡Oferta!</span>' : ''}
+            </div>
+            <div class="card-content">
                 <h3>${producto.nombre}</h3>
-                ${etiquetaHTML}
-                
-                <p class="descripcion">${producto.descripcion_larga}</p>
-                
-                <p class="precio">
+                <p class="descripcion">${producto.descripcion_corta}</p>
+                <div class="product-details">
+                    <p class="unidades">${producto.unidades} uds.</p>
+                    <p class="stock ${producto.stock === 'disponible' ? 'stock-ok' : 'stock-agotado'}">Stock: ${producto.stock}</p>
+                </div>
+
+                <div class="price-container">
                     ${precioAnteriorHTML}
-                    <span class="precio-actual">S/ ${producto.precio.toFixed(2)}</span>
-                    <span class="units">(${producto.unidades} uds.)</span>
-                </p>
-                
+                    <p class="product-price">S/ ${precioActual}</p>
+                </div>
+
                 <div class="input-cantidad-wrapper">
-                    <label for="cantidad-${producto.id}">Cantidad de Cajas:</label>
+                    <label for="cantidad-${producto.id}">Paquetes:</label>
                     <input type="number" id="cantidad-${producto.id}" class="cantidad-pedido" min="1" value="1">
                 </div>
 
-                <button class="cta-add-to-cart">Agregar al Pedido</button> 
-            `;
+                <button class="cta-agregar" data-product-id="${producto.id}">
+                    <i class="fas fa-plus"></i> Agregar
+                </button>
+                </div>
+        </article>
+    `;
+        return cardHTML;
+    }
 
-            contenedor.appendChild(card);
+    function mostrarProductos(productos) {
+        if (!productos || productos.length === 0) {
+            contenedorProductos.innerHTML = '<p>No hay productos disponibles en este momento.</p>';
+            return;
+        }
+        let contenidoHTML = '';
+        productos.forEach(producto => {
+            contenidoHTML += crearTarjetaProducto(producto);
+        });
+        contenedorProductos.innerHTML = contenidoHTML;
+    }
 
-            // 4. Lógica del Botón "Agregar al Pedido"
-            const botonElegir = card.querySelector('.cta-add-to-cart');
-            botonElegir.addEventListener('click', () => {
-                const inputCantidad = card.querySelector('.cantidad-pedido');
+    // 🎯 FUNCIÓN CLAVE: Leer la cantidad del input
+    function setupEventListeners(productosDisponibles) {
+        contenedorProductos.addEventListener('click', (e) => {
+            const button = e.target.closest('.cta-agregar');
+            if (button) {
+                const id = parseInt(button.dataset.productId);
+
+                // 1. Encontrar el contenedor de la tarjeta (article.product-card)
+                const card = button.closest('.product-card');
+
+                // 2. Encontrar el input de cantidad DENTRO de esa tarjeta
+                const inputCantidad = card.querySelector(`#cantidad-${id}`);
                 const cantidad = inputCantidad ? parseInt(inputCantidad.value) : 1;
 
-                if (cantidad < 1 || isNaN(cantidad)) {
-                    alert('Por favor, ingrese una cantidad válida.');
-                    return;
-                }
-
-                // No hay lógica de tallas ni preventa
-
-                // **NOTA IMPORTANTE:** El stock en alfajores puede ser "disponible" o un número.
-                // Si es un número, se debe adaptar la validación de stock.
-                if (producto.stock !== "disponible" && producto.stock < cantidad) {
-                    alert(`Solo quedan ${producto.stock} unidades de este producto en stock.`);
-                    return;
-                }
-
-
-                const productoSeleccionado = { ...producto, talla: null, cantidad }; // Mantenemos talla en null por si acaso
-                agregarProductoSeleccionado(productoSeleccionado);
-                alert(`${cantidad} caja(s) de ${producto.nombre} agregada(s) a tu pedido.`);
-            });
+                agregarAlPedido(id, cantidad, productosDisponibles);
+            }
         });
 
-        actualizarListaSeleccionados();
+        // Listener para el botón global de "Ver Pedido/Ir a Formulario"
+        const botonVerPedido = document.getElementById('ir-a-pedido-btn');
+        if (botonVerPedido) {
+            botonVerPedido.addEventListener('click', (e) => {
+                e.preventDefault();
 
-    } catch (error) {
-        console.error("Error al cargar el catálogo:", error);
-        contenedor.innerHTML = "<p>Error al cargar el catálogo de alfajores. Intente más tarde.</p>";
+                if (window.mostrarModal) {
+                    // 1. Asegurarse de actualizar la lista para que sepa si está vacío
+                    if (typeof actualizarListaSeleccionados === 'function') {
+                        actualizarListaSeleccionados();
+                    }
+                    // 2. Mostrar el modal (aunque esté vacío, para ver el mensaje)
+                    window.mostrarModal();
+                } else {
+                    // Fallback (mantener la redirección)
+                    window.location.href = '../formulario.html';
+                }
+
+                // const pedidos = obtenerPedidosActuales();
+                // if (pedidos.length === 0) {
+                //     alert("Tu pedido está vacío. ¡Agrega algunos alfajores!");
+                //     return;
+                // }
+
+                // if (window.mostrarModal) {
+                //     window.mostrarModal();
+                // } else {
+                //     window.location.href = '../formulario.html';
+                // }
+
+            });
+        }
     }
+
+    // Iniciar la carga de productos
+    obtenerProductos();
 });
 
-// Mantener las funciones auxiliares, ya que son la lógica del carrito
-function agregarProductoSeleccionado(producto) {
-    const seleccionados = window.productosSeleccionados;
-    // La búsqueda ya no considera la talla si es nula
-    const indiceExistente = seleccionados.findIndex(p => p.id === producto.id);
 
-    if (indiceExistente > -1) {
-        seleccionados[indiceExistente].cantidad += producto.cantidad;
-    } else {
-        seleccionados.push(producto);
-    }
-    localStorage.setItem("productosSeleccionados", JSON.stringify(seleccionados));
-    actualizarListaSeleccionados();
-}
-
+// =================================================================
+// FUNCIÓN GLOBAL PARA MANEJO DE MODAL/PEDIDOS (Fuera del DOMContentLoaded)
+// =================================================================
 function actualizarListaSeleccionados() {
-    // Esta función asume que tienes un modal o un sidebar para mostrar el pedido,
-    // usando los IDs #lista-seleccionados y #total-precio.
-    const lista = document.querySelector('#lista-seleccionados');
-    const totalElemento = document.querySelector('#total-precio');
-    const botonWhatsApp = document.querySelector('#boton-enviar-pedido-whatsapp'); // Suponemos que tienes un botón final
+    // Lee la lista de pedidos directamente del localStorage
+    const pedidos = JSON.parse(localStorage.getItem('haciendaSayanPedidos') || '[]');
 
-    if (!lista || !totalElemento) return;
+    // Asigna la lista a la variable global para que modal.js la detecte
+    window.productosSeleccionados = pedidos;
 
-    lista.innerHTML = "";
+    const lista = document.getElementById('lista-seleccionados');
+    const totalElemento = document.getElementById('total-precio');
+    const modal = document.getElementById('modal-seleccion');
+
+    if (!lista || !totalElemento || !modal) return;
+
+    lista.innerHTML = ""; // Limpiar la lista
     let total = 0;
 
-    window.productosSeleccionados.forEach((producto, index) => {
+    if (pedidos.length === 0) {
+        lista.innerHTML = '<li>Tu pedido está vacío.</li>';
+        totalElemento.textContent = `Total: S/ 0.00`;
+        // Ocultar el modal si no hay ítems (función definida en modal.js)
+        if (window.controlarVisibilidadModal) {
+            window.controlarVisibilidadModal();
+        }
+        return;
+    }
+
+    pedidos.forEach((producto, index) => {
+        const subtotal = producto.precio * producto.cantidad;
+        total += subtotal;
+
         const li = document.createElement("li");
         li.innerHTML = `
-            ${producto.nombre} - ${producto.cantidad} un. - S/ ${(producto.precio * producto.cantidad).toFixed(2)}
-            <button class="eliminar-producto" data-index="${index}">✕</button>
+            <span class="item-info">
+                ${producto.nombre} (${producto.unidades} uds.) x ${producto.cantidad} 
+            </span>
+            <span>
+                S/ ${subtotal.toFixed(2)}
+            </span>
+            <button class="eliminar-producto" data-index="${index}" title="Eliminar Producto">
+                ✕
+            </button>
         `;
         lista.appendChild(li);
-        total += producto.precio * producto.cantidad;
     });
 
     totalElemento.textContent = `Total: S/ ${total.toFixed(2)}`;
 
-    // Habilitar/Deshabilitar el botón final de WhatsApp
-    if (botonWhatsApp) {
-        botonWhatsApp.disabled = window.productosSeleccionados.length === 0;
-    }
-
-
+    // Añadir listeners para los botones de eliminar (la X)
     document.querySelectorAll(".eliminar-producto").forEach(btn => {
         btn.addEventListener('click', (e) => {
             const index = Number(e.target.getAttribute('data-index'));
-            window.productosSeleccionados.splice(index, 1);
-            localStorage.setItem("productosSeleccionados", JSON.stringify(window.productosSeleccionados));
+
+            // Eliminar el producto del array
+            pedidos.splice(index, 1);
+
+            // Guardar y actualizar el DOM
+            localStorage.setItem("haciendaSayanPedidos", JSON.stringify(pedidos));
+
+            // 🎯 LLAMADA RECURSIVA para redibujar la lista y actualizar el total
             actualizarListaSeleccionados();
         });
     });
 
-    // Esta línea puede o no ser necesaria dependiendo de cómo se active tu modal/sidebar
-    // if (window.mostrarModal) window.mostrarModal();
+    // 🎯 INTEGRACIÓN CON MODAL: Asegura la visibilidad cuando se dibuja la lista
+    if (window.controlarVisibilidadModal) {
+        window.controlarVisibilidadModal(); // Esto manejará si debe mostrarse o minimizarse
+    }
 }

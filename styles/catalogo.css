@@ -1,0 +1,199 @@
+/*----------------------
+        CATALOGO
+----------------------*/
+/* .catalogo-main-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 0;
+} */
+
+.catalogo-header-wrapper {
+    text-align: center;
+    padding: 20px 15px;
+}
+
+.catalogo-title {
+    font-family: 'Grand Hotel', cursive;
+    font-size: 2.5rem;
+    /* Título grande en móvil */
+    color: #4b3621;
+    /* Color de marca */
+    margin-bottom: 20px;
+}
+
+/* --- Botón Global de Pedido (Usando Verde WA) --- */
+#ir-a-pedido-btn {
+    background-color: #25D366;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
+}
+
+#ir-a-pedido-btn:hover {
+    background-color: #128C7E;
+}
+
+/* --- Cuadrícula de Productos (Grid) --- */
+.productos-grid {
+    display: grid;
+    /* Mobile First: Una sola columna para máxima legibilidad */
+    grid-template-columns: 1fr;
+    gap: 25px;
+    padding: 20px 15px;
+}
+
+/* ========================================================= */
+/* 2. DISEÑO DE LA TARJETA (PRODUCT-CARD) */
+/* ========================================================= */
+
+.product-card {
+    background-color: #fefefe;
+    border-radius: 12px;
+    overflow: hidden;
+    /* Sombra elegante que da profundidad */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.product-image-container {
+    position: relative;
+}
+
+.product-image-container img {
+    width: 100%;
+    height: 220px;
+    /* Altura fija para uniformidad visual */
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 15px 20px 20px;
+}
+
+.card-content h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #4b3621;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.descripcion {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.product-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    padding: 5px 0;
+    border-top: 1px dashed #e0e0e0;
+    border-bottom: 1px dashed #e0e0e0;
+    margin-bottom: 15px;
+}
+
+/* --- Precios y Ofertas --- */
+.price-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.product-price {
+    font-size: 1.6rem;
+    color: rgb(229, 112, 22);
+    /* Color de acento (Manjar) */
+    font-weight: 800;
+    margin: 0;
+}
+
+.precio-anterior {
+    text-decoration: line-through;
+    color: #a0a0a0;
+    font-size: 0.95rem;
+    font-weight: 400;
+}
+
+
+/* ========================================================= */
+/* 3. INPUT DE CANTIDAD (EL CUADRE PROFESIONAL) */
+/* ========================================================= */
+
+.input-cantidad-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.input-cantidad-wrapper label {
+    font-weight: 500;
+    color: #333;
+}
+
+.cantidad-pedido {
+    width: 70px;
+    /* Un poco más de ancho para móvil */
+    padding: 8px;
+    /* Más padding para fácil toque */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+
+/* --- Botones de Acción --- */
+.cta-agregar {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background-color: #4b3621;
+    /* Marrón de la marca */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cta-agregar:hover {
+    background-color: #6c543c;
+}
+
+@media (min-width: 768px) {
+    .productos-grid {
+        /* Dos columnas */
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        padding: 30px 25px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .productos-grid {
+        /* Dos columnas */
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        padding: 30px 25px;
+    }
+}
