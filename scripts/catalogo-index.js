@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                         <br><strong>Precio:</strong> ${precioFormateado}
                     </p>
                     
-                    <a href="../categorias/catalogo.html" class="cta-secondary-card">
+                    <a href="categorias/catalogo.html" class="cta-secondary-card">
                         Ver Catálogo y Pedir
                     </a>
                 </div>
