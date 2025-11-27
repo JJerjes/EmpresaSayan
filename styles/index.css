@@ -491,9 +491,9 @@ main {
 
 .main-footer {
     background-color: #333333;
-    /* background-color: rgb(229, 112, 22); */
     padding: 40px 20px 10px;
     font-family: 'Montserrat', sans-serif;
+    color: white;
 }
 
 .footer-grid-container {
@@ -507,78 +507,150 @@ main {
     grid-template-columns: 1fr;
 }
 
+/* --- Estilos Generales --- */
 .footer-logo {
     border-radius: 10%;
+    /* Asegura que el logo tenga espacio si no está usando 'navigation-info img' */
 }
 
 .navigation-info img {
-    margin: 10px;
+    margin-bottom: 15px;
+
+    /* Ajuste para separar el logo de los enlaces */
 }
 
+h3 {
+    /* Aplicar un color único a todos los títulos del footer */
+
+    margin-bottom: 15px;
+}
+
+/* --- Columna de Navegación --- */
 .footer-links {
     list-style: none;
+    padding: 0;
+    /* Asegura que no haya padding si es una lista */
+    margin: 0;
 }
 
-.contact-support h3 {
+.footer-links li {
+    margin-bottom: 8px;
+    /* Espacio entre cada elemento de la lista */
+}
+
+.footer-links a {
     color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+    /* Los enlaces de lista deben ser display:block si quieres que toquen los bordes */
 }
 
-.fas {
-    color: white;
-}
-
-.contact-details p,
-.contact-details a {
-    color: white;
-}
-
-.contact-details:hover i {
+.footer-links a:hover {
     color: rgb(229, 112, 22);
+    /* Color de acento al pasar el mouse */
 }
 
-.contact-details:hover a {
+/* --- Columna de Contacto --- */
+.contact-details p {
+    margin-bottom: 10px;
+    /* El color de texto ya lo hereda de .main-footer (white) */
+}
+
+/* Los íconos deben tener un color de acento o blanco */
+.contact-details i {
     color: rgb(229, 112, 22);
-}
-
-.social-links-section h3 {
-    color: white;
-}
-
-.social-links a,
-.social-links i {
-    color: white;
-}
-
-.social-links:hover a {
-    color: rgb(229, 112, 22);
-}
-
-.mt-20 {
-    margin: 20px 0 0 0;
-}
-
-.copyright-info p {
-    color: white;
-}
-
-.footer-bottom p {
-    color: white;
+    /* Color de acento para los íconos (opcional) */
+    margin-right: 8px;
+    width: 20px;
+    /* Ancho fijo para alineación si son múltiples */
     text-align: center;
 }
 
-/* Busca esta regla y cámbiala: */
-.footer-links a {
+/* IMPORTANTE: Corrige el problema de hover en bloque */
+.contact-details a {
     color: white;
-    /* <-- CAMBIADO A BLANCO */
     text-decoration: none;
     transition: color 0.3s;
-    list-style: none;
 }
 
-/* Y para el hover, podemos usar el color del fondo original o un color que contraste: */
-.footer-links a:hover {
+/* El HOVER solo aplica al enlace <a>, no al <p> contenedor */
+.contact-details a:hover {
     color: rgb(229, 112, 22);
-    /* Color oscuro al pasar el mouse */
+    /* Solo cambia el color del enlace */
+    text-decoration: underline;
+    /* Opcional: Subrayar para indicar que es un enlace */
+}
+
+/* Eliminamos las reglas .contact-details:hover i y .contact-details:hover a que aplicaban el hover al bloque */
+
+/* .social-links {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    } */
+
+/* --- Columna de Redes Sociales --- */
+.social-links a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    /* Para alinear ícono y texto */
+    align-items: center;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+}
+
+.social-links a i {
+    color: rgb(229, 112, 22);
+    /* Color del ícono inicialmente */
+    margin-right: 10px;
+    font-size: 1.2em;
+    width: 20px;
+}
+
+/* El HOVER solo aplica al enlace <a> */
+.social-links a:hover {
+    color: rgb(229, 112, 22);
+}
+
+/* Si quieres que el ícono cambie de color también, puedes hacer: */
+.social-links a:hover i {
+    color: rgb(229, 112, 22);
+}
+
+/* --- Pie de página y Copyright --- */
+.copyright-info p,
+.footer-bottom p {
+    /* El color ya fue establecido en .main-footer */
+    margin-top: 15px;
+    font-size: 0.9em;
+}
+
+.footer-bottom p {
+    text-align: center;
+    padding-top: 10px;
+}
+
+
+/* --- Media Queries para Escritorio (Opcional) --- */
+
+@media (min-width: 768px) {
+    .footer-grid-container {
+        text-align: left;
+        /* Alinea el texto a la izquierda en pantallas grandes */
+        grid-template-columns: 1fr 1fr 1fr;
+        /* Distribuye las tres columnas */
+    }
+
+    .navigation-info {
+        text-align: left;
+    }
+
+    .social-links a {
+        justify-content: start;
+    }
 }
 
 /*----------------------
@@ -712,6 +784,12 @@ main {
         grid-template-columns: repeat(3, 1fr);
     }
 
+    .footer-column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
 }
 
 @media (min-width: 1024px) {
@@ -725,6 +803,12 @@ main {
 
     .options-container {
         display: flex;
+    }
+
+    .footer-column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
 }

@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 // Redirigir al formulario
                 const basePath = window.basePath || '../'; // Usamos ruta relativa segura
-                window.location.href = basePath + "formulario.html";
+                window.location.href = basePath + "../categorias/formulario.html";
             });
 
             // Exponer funciones necesarias globalmente
