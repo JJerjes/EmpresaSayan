@@ -6,10 +6,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const basePath = window.basePath || "";
 
+    const RUTA_JSON_INDEX = `${basePath}data/catalogo-index.json`;
+
     try {
         // 2. Cargar el Catálogo de Alfajores
-        const urlCatalogo = `${basePath}data/catalogo.json`;
-        const respuesta = await fetch(urlCatalogo);
+        const respuesta = await fetch(RUTA_JSON_INDEX);
 
         if (!respuesta.ok) {
             throw new Error(`Error al cargar el catálogo: ${respuesta.status}`);
@@ -47,7 +48,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                         <br><strong>Precio:</strong> ${precioFormateado}
                     </p>
                     
-                    <a href="catalogo.html" class="cta-secondary-card">
+                    <a href="../categorias/catalogo.html" class="cta-secondary-card">
                         Ver Catálogo y Pedir
                     </a>
                 </div>
