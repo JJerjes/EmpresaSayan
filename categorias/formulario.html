@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hacienda Sayan - Pedido a Domicilio y Contacto</title>
+
+  <meta name="description" content="Rellena nuestro formulario para solicitar tu pedido de alfajores a domicilio en Lima. Contacta con nosotros para consultas, distribuidores y soporte.">
+  <meta name="keywords" content="pedido online, delivery alfajores, formulario de pedido, contacto Hacienda Sayán, soporte, manjar blanco">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Grand+Hotel&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="..." crossorigin="anonymous" referrerpolicy="no-referrer" /> 
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../styles/index.css">
+  <link rel="stylesheet" href="../styles/formulario.css">
+  <!-- <link rel="stylesheet" href="../styles/nosotros.css"> -->
+  <link rel="stylesheet" href="../styles/modal.css" />
+
+  <script>window.basePath = '../';</script>
+  
+  <script src="../scripts/include.js" defer></script>
+  <script src="../scripts/formulario.js" defer></script>
+  <!-- <script src="../scripts/carousel.js" defer></script> -->
+
+  <!-- <script src="../scripts/catalogo.js" defer></script> -->
+</head>
+<body>
+  <div id="header-placeholder"></div>
+
+  <main role="main">
+    <section id="delivery-form-section" class="form-section" aria-labelledby="form-heading">
+      <div class="form-grid">
+        <div class="form-col-sidebar">
+          <article class="option-card payment-conditions">
+            <h2>Condiciones de Pago y Entrega 🛒</h2>
+
+            <div class="condition-box delivery-box">
+              <h3>📦 Delivery a Domicilio</h3>
+              <p>El pedido es enviado a tu dirección.</p>
+
+              <ul class="condition-list">
+                <li><i class="fas fa-check-circle"></i>Pago del 100% del pedido por adelantado.</li>
+                <li><i class="fas fa-check-circle"></i>Se cobra adicional por el servicio de envío.</li>
+                <li><i class="fas fa-check-circle"></i>Confirmaremos el costo de envío y total por WhatsApp.</li>
+              </ul>
+            </div>
+        
+            <div class="condition-box contraentrega-box">
+              <h3>🤝 Pago Contra Entrega</h3>
+              <p>Válido para entrega en puntos específicos estaciones(tren/metropolitano).</p>
+              <ul class="condition-list">
+                <li><i class="fas fa-check-circle"></i>Pagas al momento de la entrega.</li>
+                <li><i class="fas fa-check-circle"></i>No aplica costo adicional de envío (solo por producto).</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="option-card payment-option">
+            <h2>Medios de Pago Aceptados</h2>
+            <p class="trust-intro-text">Puedes usar cualquiera de estos métodos.</p>
+            
+            <ul class="payment-list-small">
+              <li><i class="fas fa-mobile-alt"></i><b>YAPE & PLIN:</b> +51 987678765</li>
+              <li><i class="fas fa-university"></i><b>Transferencia Bancaria:</b><br>💳 <b>BCP:</b> xxxxxxxxxxxxxxx <br> 💳 <b>Interbank:</b> xxxxxxxxxxxx</li>
+              <li><i class="fas fa-hand-holding-usd"></i><b>Pago Contra Entrega:</b> Solo en puntos de recojo 🪙</li>
+            </ul>
+          </article>
+
+          <div class="trust-message-box">
+            <h3>Duda o Problema ⭐</h3>
+            <p>Si tienes problemas técnicos al enviar el formulario o necesitas una consulta rápida:</p>
+            <ul class="contact-list-stacked">
+              <li><i class="far fa-envelope"></i><a href="mailto:informe@sayan.com">informe@sayan.com</a> </li>
+              <li><i class="far fa-envelope"></i><a href="mailto:reclamos@sayan.com">reclamos@sayan.com</a> </li>
+            </ul>
+            <hr>
+          </div>
+        </div>
+
+        <div class="form-col-main">
+          <form id="delivery-form" class="delivery-form">
+            <h2 id="form-heading" class="section-title">Confirma tu Pedido 📦</h2>
+            
+            <fieldset>
+              <legend>Datos de Contacto</legend>
+
+              <div class="form-group">
+                <label for="nombre">Nombre Completo: </label>
+                <input type="text" id="nombre" name="nombre" required aria-required="true">
+                          
+                <label for="dni">DNI:</label>
+                <input type="text" id="dni" name="dni" maxlength="8" pattern="\d{8}" required title="Debe contener exactamente 8 dígitos.">    
+              
+                <label for="celular">Celular (WhatsApp):</label>
+                <input type="tel" id="celular" name="celular" maxlength="9" pattern="[0-9]{9}" required aria-required="true" placeholder="Ej: 987654321">         
+             
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" name="email" required>
+              
+            </fieldset>
+
+            <fieldset>
+              <legend>Tipo de Entrega *</legend>
+              <div class="form-group">
+                  
+                <label for="tipo_entrega">Selecciona tu Modalidad de Entrega:</label>
+                <select name="tipo_entrega" id="tipo_entrega" required>
+                  <option value="" disabled selected>Elige una opción</option>
+                  
+                  <option value="Delivery a Domicilio">
+                      📦 Delivery a Domicilio
+                  </option>
+                  
+                  <option value="Contra Entrega (Tren o Metro)">
+                      🤝 Contra Entrega (Estaciones Tren/Metropolitano)
+                  </option>
+                  
+                </select>
+                
+              </div>
+            </fieldset>
+            
+            <button type="submit">Confirmar Pedido</button>
+            
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <a href="https://wa.me/519XXXXXXXX?text=Hola,%20me%20interesan%20sus%20alfajores%20y%20quisiera%20más%20información." target="_blank" class="whatsapp-float" aria-label="Contáctanos por WhatsApp" title="WHATSAPP">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <!-- <div id="modal-placeholder"></div> -->
+</body>
+</html>
